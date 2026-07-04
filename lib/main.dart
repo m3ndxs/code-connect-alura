@@ -1,3 +1,4 @@
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Code Connect',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.dark,
       home: const HomePage(),
     );
   }
