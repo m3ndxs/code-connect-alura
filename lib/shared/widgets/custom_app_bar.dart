@@ -1,0 +1,39 @@
+import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:flutter/material.dart';
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final Widget? widget;
+  const CustomAppBar({super.key, this.widget});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      toolbarHeight: 110,
+      centerTitle: true,
+      title: Image.asset('assets/images/Logo.png', height: 50),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 24, bottom: 32),
+          child: OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: AppColors.primary, width: 2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+            ),
+            child: Text(
+              'Publicar',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(190);
+}
