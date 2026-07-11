@@ -8,6 +8,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColors.background,
+      elevation: 0,
+      scrolledUnderElevation: 0,
       toolbarHeight: 110,
       centerTitle: true,
       title: Image.asset('assets/images/Logo.png', height: 50),
