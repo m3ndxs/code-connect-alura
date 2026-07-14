@@ -8,9 +8,13 @@ class CustomBottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
-    final currentIndex = navigationItems.indexWhere(
+    int currentIndex = navigationItems.indexWhere(
       (item) => item.route == location,
     );
+
+    if (currentIndex == -1) {
+      currentIndex = 0;
+    }
 
     return NavigationBar(
       selectedIndex: currentIndex,

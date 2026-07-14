@@ -1,5 +1,7 @@
+import 'package:code_connect_app/core/routes/routes.dart';
 import 'package:code_connect_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? widget;
@@ -19,7 +21,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 24, bottom: 32),
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.push(Routes.publish);
+            },
             style: OutlinedButton.styleFrom(
               side: const BorderSide(color: AppColors.primary, width: 2),
               shape: RoundedRectangleBorder(

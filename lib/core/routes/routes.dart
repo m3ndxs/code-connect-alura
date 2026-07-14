@@ -3,4 +3,5 @@ class Routes {
   static const profile = '/profile';
   static const about = '/about';
   static const login = '/login';
+  static const publish = '/publish';
 }
