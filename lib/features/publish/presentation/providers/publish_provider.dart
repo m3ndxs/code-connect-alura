@@ -1,6 +1,27 @@
+import 'dart:io';
+
+import 'package:code_connect_app/features/publish/data/models/publish_request_model.dart';
+import 'package:code_connect_app/features/publish/domain/entities/post.dart';
+import 'package:code_connect_app/features/publish/domain/repositories/publish_repository.dart';
 import 'package:flutter/material.dart';
 
 class PublishProvider extends ChangeNotifier {
+  // Dependencias
+  final PublishRepository repository;
+
+  PublishProvider(this.repository);
+
+  // Estados da tela
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  String? _error;
+  String? get error => _error;
+
+  Post? _post;
+  Post? get post => _post;
+
+  // Tags
   final List<String> _tags = [];
   List<String> get tags => List.unmodifiable(_tags);
 
@@ -39,5 +60,36 @@ class PublishProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  // Publicar Posts
+  Future<void> publish({
+    required String title,
+    required String body,
+    required String markdown,
+    required File image,
+  }) async {
+    if (_isLoading) return;
+
+    try {
+      _isLoading = true;
+      _error = null;
+
+      notifyListeners();
+
+      final request = PublishRequestModel(
+        title: title,
+        body: body,
+        markdown: markdown,
+        image: image,
+      );
+
+      _post = await repository.publish(request);
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
