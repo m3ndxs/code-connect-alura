@@ -1,4 +1,6 @@
 import 'package:code_connect_app/features/publish/presentation/providers/publish_provider.dart';
+import 'package:code_connect_app/features/publish/presentation/widgets/image_picker_card.dart';
+import 'package:code_connect_app/features/publish/presentation/widgets/publish_form.dart';
 import 'package:code_connect_app/shared/layout/main_layout.dart';
 import 'package:code_connect_app/shared/widgets/custom_search_bar.dart';
 import 'package:code_connect_app/shared/widgets/search_tags.dart';
@@ -19,30 +21,33 @@ class _PublishPageState extends State<PublishPage> {
 
     return MainLayout(
       showBottomNavigation: false,
-      child: Center(
-        child: Column(
-          children: [
-            CustomSearchBar(
-              onSubmitted: (text) {
-                provider.addTag(text);
-              },
-            ),
-            const SizedBox(height: 16),
-            SearchTags(tags: provider.tags, onRemove: provider.removeTags),
-            if (provider.tags.isNotEmpty)
-              Align(
-                alignment: AlignmentGeometry.center,
-                child: TextButton(
-                  onPressed: provider.clearTags,
-                  child: Text(
-                    'Limpar tudo',
-                    style: Theme.of(context).textTheme.bodyMedium,
+      child: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              CustomSearchBar(
+                onSubmitted: (text) {
+                  provider.addTag(text);
+                },
+              ),
+              const SizedBox(height: 16),
+              SearchTags(tags: provider.tags, onRemove: provider.removeTags),
+              if (provider.tags.isNotEmpty)
+                Align(
+                  alignment: AlignmentGeometry.center,
+                  child: TextButton(
+                    onPressed: provider.clearTags,
+                    child: Text(
+                      'Limpar tudo',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                 ),
-              ),
-            SizedBox(height: 60),
-            Text('Publish'),
-          ],
+              SizedBox(height: 60),
+              ImagePickerCard(),
+              PublishForm(),
+            ],
+          ),
         ),
       ),
     );

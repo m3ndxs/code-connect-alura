@@ -4,6 +4,7 @@ import 'package:code_connect_app/features/publish/data/models/publish_request_mo
 import 'package:code_connect_app/features/publish/domain/entities/post.dart';
 import 'package:code_connect_app/features/publish/domain/repositories/publish_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PublishProvider extends ChangeNotifier {
   // Dependencias
@@ -91,5 +92,30 @@ class PublishProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  // Upload Image
+  File? selectedImage;
+
+  Future<void> pickImage() async {
+    print('Entrou no pickImage');
+
+    final picker = ImagePicker();
+
+    final image = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+    );
+
+    if (image == null) return;
+
+    selectedImage = File(image.path);
+
+    notifyListeners();
+  }
+
+  void removeImage() {
+    selectedImage = null;
+    notifyListeners();
   }
 }

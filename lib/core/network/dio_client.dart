@@ -7,7 +7,7 @@ class DioClient {
   DioClient()
     : dio = Dio(
         BaseOptions(
-          baseUrl: "http://10.0.2.2:3000/api",
+          baseUrl: "http://10.0.2.2:3000",
           connectTimeout: const Duration(seconds: 30),
           receiveTimeout: const Duration(seconds: 30),
           headers: {"Accept": "application/json"},
@@ -15,6 +15,14 @@ class DioClient {
       ) {
     dio.interceptors.add(AuthInterceptor());
 
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+        request: true,
+        requestHeader: true,
+        error: true,
+      ),
+    );
   }
 }

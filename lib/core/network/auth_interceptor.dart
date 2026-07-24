@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class AuthInterceptor extends Interceptor {
   String? token;
@@ -7,6 +8,8 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    debugPrint('Token $token');
+
     if (token != null && token!.isNotEmpty) {
       options.headers["Authorization"] = "Bearer $token";
     }
