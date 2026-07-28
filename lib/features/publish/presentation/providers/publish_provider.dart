@@ -98,8 +98,6 @@ class PublishProvider extends ChangeNotifier {
   File? selectedImage;
 
   Future<void> pickImage() async {
-    print('Entrou no pickImage');
-
     final picker = ImagePicker();
 
     final image = await picker.pickImage(

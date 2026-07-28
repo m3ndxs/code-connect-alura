@@ -1,8 +1,8 @@
 import 'package:code_connect_app/core/theme/app_colors.dart';
 import 'package:code_connect_app/features/publish/presentation/providers/publish_provider.dart';
+import 'package:code_connect_app/shared/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class PublishForm extends StatefulWidget {
@@ -145,31 +145,18 @@ class _PublishFormState extends State<PublishForm> {
             Row(
               children: [
                 Expanded(
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      fixedSize: const Size(152, 51),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(12),
-                      ),
-                      side: const BorderSide(
-                        color: AppColors.primary,
-                        width: 2,
-                      ),
-                    ),
+                  child: OutlinedButtonWidget(
+                    color: AppColors.primary,
+                    size: Size(152, 51),
                     onPressed: () {
                       context.pop();
                     },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Descartar',
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(color: AppColors.primary),
-                        ),
-                        SizedBox(width: 12),
-                        Icon(Icons.delete, size: 24, color: AppColors.primary),
-                      ],
+                    buttonTitle: 'Descartar',
+                    sizedBox: SizedBox(width: 12),
+                    iconButton: Icon(
+                      Icons.delete,
+                      size: 24,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),

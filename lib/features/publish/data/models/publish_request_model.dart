@@ -19,8 +19,8 @@ class PublishRequestModel {
     return FormData.fromMap(({
       "title": title,
       "body": body,
-      "markdown": markdown,
-      "iamge": await MultipartFile.fromFile(
+      "markdown": body,
+      "image": await MultipartFile.fromFile(
         image.path,
         filename: image.path.split('/').last,
       ),
