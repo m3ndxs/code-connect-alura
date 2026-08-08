@@ -1,11 +1,9 @@
-import 'package:code_connect_app/core/providers/text_provider.dart';
 import 'package:code_connect_app/core/theme/app_colors.dart';
 import 'package:code_connect_app/features/about/presentation/cubit/about_cubit.dart';
 import 'package:code_connect_app/features/about/presentation/cubit/about_state.dart';
 import 'package:code_connect_app/features/about/repositories/about_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
