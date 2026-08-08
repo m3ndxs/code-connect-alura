@@ -20,7 +20,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       } else {
         throw ServerException();
       }
-    } on DioException catch (e) {
+    } on DioException catch (_) {
       throw ServerException();
     }
   }
