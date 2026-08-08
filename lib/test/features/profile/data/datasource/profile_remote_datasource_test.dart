@@ -1,5 +1,4 @@
 import 'package:code_connect_app/core/errors/exceptions.dart';
-import 'package:code_connect_app/core/network/dio_client.dart';
 import 'package:code_connect_app/features/profile/data/datasource/profile_remote_datasource.dart';
 import 'package:code_connect_app/features/profile/data/models/user_model.dart';
 import 'package:dio/dio.dart';

@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(
                           '@${user.username}',
-                          style: Theme.of(context).textTheme.displayMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(width: 16),
                         OutlinedButtonWidget(

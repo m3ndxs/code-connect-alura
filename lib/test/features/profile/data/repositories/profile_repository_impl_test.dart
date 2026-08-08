@@ -27,14 +27,6 @@ void main() {
     avatar: 'avatar_test.png',
   );
 
-  final tUserEntity = UserEntity(
-    id: '123',
-    email: 'joao@teste.com',
-    name: 'João',
-    username: 'joao_dev_test',
-    avatar: 'avatar_test.png',
-  );
-
   group('ProfileRepositoryImpl', () {
     test(
       'Deve retornar Right(ProfileEntity) quando o DataSource for bem-sucedido',
