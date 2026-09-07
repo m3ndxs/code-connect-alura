@@ -1,17 +1,22 @@
-import 'package:code_connect_app/features/publish/presentation/providers/publish_provider.dart';
 import 'package:code_connect_app/shared/widgets/search_tag.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchTags extends StatelessWidget {
   final List<String> tags;
+  final String? selectedTag;
   final ValueChanged<String>? onRemove;
+  final ValueChanged<String>? onSelect;
 
-  const SearchTags({super.key, required this.tags, this.onRemove});
+  const SearchTags({
+    super.key,
+    required this.tags,
+    this.selectedTag,
+    this.onRemove,
+    this.onSelect,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<PublishProvider>();
     if (tags.isEmpty) return const SizedBox.shrink();
 
     return Padding(
@@ -22,9 +27,9 @@ class SearchTags extends StatelessWidget {
         children: tags.map((tag) {
           return SearchTag(
             text: tag,
-            isSelected: provider.selectedTag == tag,
-            onTap: () => provider.selectTag(tag),
-            onRemove: () => provider.removeTags(tag),
+            isSelected: selectedTag == tag,
+            onTap: onSelect != null ? () => onSelect!(tag) : () {},
+            onRemove: onRemove != null ? () => onRemove!(tag) : null,
           );
         }).toList(),
       ),

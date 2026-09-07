@@ -1,22 +1,28 @@
+import 'dart:io';
 import 'package:code_connect_app/core/theme/app_colors.dart';
-import 'package:code_connect_app/features/publish/presentation/providers/publish_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:path/path.dart' as path;
 
 class ImagePickerCard extends StatelessWidget {
-  const ImagePickerCard({super.key});
+  final File? selectedImage;
+  final VoidCallback? onPickImage;
+  final VoidCallback? onRemoveImage;
+
+  const ImagePickerCard({
+    super.key,
+    this.selectedImage,
+    this.onPickImage,
+    this.onRemoveImage,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<PublishProvider>();
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           GestureDetector(
-            onTap: provider.pickImage,
+            onTap: onPickImage,
             child: Container(
               height: 370,
               width: double.infinity,
@@ -24,12 +30,12 @@ class ImagePickerCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 color: AppColors.grey,
               ),
-              child: provider.selectedImage == null
+              child: selectedImage == null
                   ? const Icon(Icons.add_photo_alternate, size: 80)
                   : ClipRRect(
                       borderRadius: BorderRadiusGeometry.circular(12),
                       child: Image.file(
-                        provider.selectedImage!,
+                        selectedImage!,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -46,7 +52,7 @@ class ImagePickerCard extends StatelessWidget {
               ),
               side: const BorderSide(color: AppColors.greyMedium, width: 2),
             ),
-            onPressed: provider.pickImage,
+            onPressed: onPickImage,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -60,14 +66,14 @@ class ImagePickerCard extends StatelessWidget {
             ),
           ),
 
-          if (provider.selectedImage != null)
+          if (selectedImage != null)
             Row(
               children: [
                 Expanded(
-                  child: Text(path.basename(provider.selectedImage!.path)),
+                  child: Text(path.basename(selectedImage!.path)),
                 ),
                 IconButton(
-                  onPressed: provider.removeImage,
+                  onPressed: onRemoveImage,
                   icon: const Icon(Icons.close),
                 ),
               ],

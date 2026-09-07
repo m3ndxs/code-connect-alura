@@ -1,28 +1,80 @@
-import 'package:code_connect_app/features/publish/data/models/publish_request_model.dart';
-import 'package:code_connect_app/features/publish/data/models/publish_response_model.dart';
+import 'dart:io';
+import 'package:code_connect_app/core/errors/exceptions.dart';
+import 'package:code_connect_app/features/publish/data/models/post_model.dart';
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 
-class PublishRemoteDatasource {
+abstract class PublishRemoteDataSource {
+  Future<PostModel> postPublish(
+    String title,
+    String body,
+    String markdwon,
+    File image,
+  );
+}
+
+class PublishRemoteDataSourceImpl implements PublishRemoteDataSource {
   final Dio dio;
+  PublishRemoteDataSourceImpl({required this.dio});
 
-  PublishRemoteDatasource(this.dio);
-
-  Future<PublishResponseModel> publish(PublishRequestModel request) async {
+  @override
+  Future<PostModel> postPublish(
+    String title,
+    String body,
+    String markdwon,
+    File image,
+  ) async {
     try {
-      final response = await dio.post<Map<String, dynamic>>(
-        "/blog-posts",
-        data: await request.toFormData(),
+      final formData = FormData.fromMap({
+        'title': title,
+        'body': body,
+        'markdown': markdwon,
+        'image': await MultipartFile.fromFile(
+          image.path,
+          filename: image.uri.pathSegments.isNotEmpty
+              ? image.uri.pathSegments.last
+              : 'image.jpg',
+          contentType: _contentTypeFor(image.path),
+        ),
+      });
+
+      final response = await dio.post(
+        '/blog-posts',
+        data: formData,
       );
 
-      return PublishResponseModel.fromJson(response.data!);
-    } on DioException catch (e) {
-      final data = e.response?.data;
-
-      if (data is Map<String, dynamic>) {
-        throw Exception(data["message"] ?? "Erro ao publicar o post.");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return PostModel.fromJson(response.data);
+      } else {
+        throw ServerException(_extractMessage(response.data));
       }
-
-      throw Exception("Erro ao publicar o post.");
+    } on DioException catch (error) {
+      throw ServerException(_extractMessage(error.response?.data));
     }
+  }
+
+  MediaType? _contentTypeFor(String path) {
+    final extension = path.split('.').last.toLowerCase();
+    switch (extension) {
+      case 'jpg':
+      case 'jpeg':
+        return MediaType('image', 'jpeg');
+      case 'png':
+        return MediaType('image', 'png');
+      case 'webp':
+        return MediaType('image', 'webp');
+      case 'gif':
+        return MediaType('image', 'gif');
+      default:
+        return MediaType('image', 'jpeg');
+    }
+  }
+
+  String _extractMessage(dynamic data) {
+    if (data is Map<String, dynamic>) {
+      final message = data['message'] ?? data['error'];
+      if (message is String && message.isNotEmpty) return message;
+    }
+    return 'Servidor Indisponível no momento.';
   }
 }

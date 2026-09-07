@@ -1,12 +1,21 @@
 import 'package:code_connect_app/core/theme/app_colors.dart';
-import 'package:code_connect_app/features/publish/presentation/providers/publish_provider.dart';
+import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
 import 'package:code_connect_app/shared/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class PublishForm extends StatefulWidget {
-  const PublishForm({super.key});
+  final List<String> tags;
+  final ValueChanged<String>? onAddTag;
+  final ValueChanged<String>? onRemoveTag;
+
+  const PublishForm({
+    super.key,
+    this.tags = const [],
+    this.onAddTag,
+    this.onRemoveTag,
+  });
 
   @override
   State<PublishForm> createState() => _PublishFormState();
@@ -17,11 +26,6 @@ class _PublishFormState extends State<PublishForm> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _tagController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -100,7 +104,7 @@ class _PublishFormState extends State<PublishForm> {
               onFieldSubmitted: (value) {
                 if (value.trim().isEmpty) return;
 
-                context.read<PublishProvider>().addTag(value.trim());
+                widget.onAddTag?.call(value.trim());
                 _tagController.clear();
               },
               style: Theme.of(
@@ -120,26 +124,23 @@ class _PublishFormState extends State<PublishForm> {
               ),
             ),
             SizedBox(height: 12),
-            Consumer<PublishProvider>(
-              builder: (context, provider, child) {
-                return Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: provider.tags.map((tag) {
-                    return Chip(
-                      label: Text(tag),
-                      labelStyle: Theme.of(context).textTheme.bodyLarge
-                          ?.copyWith(color: AppColors.background),
-                      backgroundColor: AppColors.offWhite,
-                      deleteIcon: const Icon(
-                        Icons.close,
-                        color: AppColors.background,
-                      ),
-                      onDeleted: () => provider.removeTags(tag),
-                    );
-                  }).toList(),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: widget.tags.map((tag) {
+                return Chip(
+                  label: Text(tag),
+                  labelStyle: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(color: AppColors.background),
+                  backgroundColor: AppColors.offWhite,
+                  deleteIcon: const Icon(
+                    Icons.close,
+                    color: AppColors.background,
+                  ),
+                  onDeleted: () => widget.onRemoveTag?.call(tag),
                 );
-              },
+              }).toList(),
             ),
             SizedBox(height: 40),
             Row(
@@ -163,16 +164,15 @@ class _PublishFormState extends State<PublishForm> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () async {
+                    onPressed: () {
                       if (!_formKey.currentState!.validate()) return;
 
-                      final provider = context.read<PublishProvider>();
-
-                      await context.read<PublishProvider>().publish(
-                        title: _titleController.text.trim(),
-                        body: _descriptionController.text.trim(),
-                        markdown: '',
-                        image: provider.selectedImage!,
+                      context.read<PublishBloc>().add(
+                        PublishSubmittedEvent(
+                          _titleController.text.trim(),
+                          _descriptionController.text.trim(),
+                          'teste',
+                        ),
                       );
                     },
                     child: Row(
