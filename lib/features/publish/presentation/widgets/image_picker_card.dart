@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
@@ -28,16 +28,13 @@ class ImagePickerCard extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: AppColors.grey,
+                color: AppTheme.cinza,
               ),
               child: selectedImage == null
                   ? const Icon(Icons.add_photo_alternate, size: 80)
                   : ClipRRect(
                       borderRadius: BorderRadiusGeometry.circular(12),
-                      child: Image.file(
-                        selectedImage!,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.file(selectedImage!, fit: BoxFit.cover),
                     ),
             ),
           ),
@@ -50,7 +47,7 @@ class ImagePickerCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(12),
               ),
-              side: const BorderSide(color: AppColors.greyMedium, width: 2),
+              side: const BorderSide(color: AppTheme.cinzaMedio, width: 2),
             ),
             onPressed: onPickImage,
             child: Row(
@@ -58,10 +55,10 @@ class ImagePickerCard extends StatelessWidget {
               children: [
                 Text(
                   'Carregar Imagem',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(width: 8),
-                Icon(Icons.upload, size: 24, color: AppColors.greyLight),
+                Icon(Icons.upload, size: 24, color: AppTheme.cinzaClaro),
               ],
             ),
           ),
@@ -69,9 +66,7 @@ class ImagePickerCard extends StatelessWidget {
           if (selectedImage != null)
             Row(
               children: [
-                Expanded(
-                  child: Text(path.basename(selectedImage!.path)),
-                ),
+                Expanded(child: Text(path.basename(selectedImage!.path))),
                 IconButton(
                   onPressed: onRemoveImage,
                   icon: const Icon(Icons.close),

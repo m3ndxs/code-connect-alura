@@ -1,4 +1,4 @@
-import 'package:code_connect_app/shared/navigation/navigation_items.dart';
+import 'package:code_connect_app/core/navigation/navigation_items.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

@@ -10,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: 'Code Connect',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
+      theme: AppTheme.darkTheme,
       routerConfig: appRouter,
     );
   }

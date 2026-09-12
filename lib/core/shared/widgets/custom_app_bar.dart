@@ -1,5 +1,5 @@
 import 'package:code_connect_app/core/routes/routes.dart';
-import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppTheme.grafite,
       elevation: 0,
       scrolledUnderElevation: 0,
       toolbarHeight: 110,
@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               context.push(Routes.publish);
             },
             style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: AppColors.primary, width: 2),
+              side: const BorderSide(color: AppTheme.verdeDestaque, width: 2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

@@ -1,4 +1,4 @@
-import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class SearchTag extends StatelessWidget {
@@ -22,7 +22,7 @@ class SearchTag extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
-          color: AppColors.greyLight,
+          color: AppTheme.cinzaClaro,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -32,13 +32,17 @@ class SearchTag extends StatelessWidget {
               text,
               style: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColors.dark),
+              ).textTheme.bodySmall?.copyWith(color: AppTheme.cinzaEscuro),
             ),
             if (isSelected) ...[
               const SizedBox(width: 8),
               GestureDetector(
                 onTap: onRemove,
-                child: const Icon(Icons.close, size: 18, color: AppColors.dark),
+                child: const Icon(
+                  Icons.close,
+                  size: 18,
+                  color: AppTheme.cinzaEscuro,
+                ),
               ),
             ],
           ],

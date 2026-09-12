@@ -3,7 +3,7 @@ import 'package:code_connect_app/features/about/presentation/about_page.dart';
 import 'package:code_connect_app/features/feed/presentation/feed_page.dart';
 import 'package:code_connect_app/features/profile/presentation/profile_page.dart';
 import 'package:code_connect_app/features/publish/presentation/pages/publish_page.dart';
-import 'package:code_connect_app/shared/layout/main_layout.dart';
+import 'package:code_connect_app/core/shared/layout/main_layout.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(

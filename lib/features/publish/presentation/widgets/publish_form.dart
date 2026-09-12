@@ -1,6 +1,6 @@
-import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
-import 'package:code_connect_app/shared/widgets/outlined_button_widget.dart';
+import 'package:code_connect_app/core/shared/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -47,19 +47,19 @@ class _PublishFormState extends State<PublishForm> {
           children: [
             Text(
               'Novo Projeto',
-              style: Theme.of(context).textTheme.displayMedium,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(height: 40),
             Text(
               'Nome do Projeto',
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(height: 8),
             TextFormField(
               controller: _titleController,
               style: Theme.of(
                 context,
-              ).textTheme.bodyLarge?.copyWith(color: AppColors.background),
+              ).textTheme.bodyMedium?.copyWith(color: AppTheme.grafite),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -70,11 +70,11 @@ class _PublishFormState extends State<PublishForm> {
                   borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 filled: true,
-                fillColor: AppColors.offWhite,
+                fillColor: AppTheme.offWhite,
               ),
             ),
             SizedBox(height: 24),
-            Text('Descrição', style: Theme.of(context).textTheme.bodyLarge),
+            Text('Descrição', style: Theme.of(context).textTheme.bodyMedium),
             SizedBox(height: 8),
             TextFormField(
               controller: _descriptionController,
@@ -82,7 +82,7 @@ class _PublishFormState extends State<PublishForm> {
               textAlignVertical: TextAlignVertical.top,
               style: Theme.of(
                 context,
-              ).textTheme.bodyLarge?.copyWith(color: AppColors.background),
+              ).textTheme.bodyMedium?.copyWith(color: AppTheme.grafite),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -93,11 +93,11 @@ class _PublishFormState extends State<PublishForm> {
                   borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 filled: true,
-                fillColor: AppColors.offWhite,
+                fillColor: AppTheme.offWhite,
               ),
             ),
             SizedBox(height: 24),
-            Text('Tags', style: Theme.of(context).textTheme.bodyLarge),
+            Text('Tags', style: Theme.of(context).textTheme.bodyMedium),
             SizedBox(height: 8),
             TextFormField(
               controller: _tagController,
@@ -109,7 +109,7 @@ class _PublishFormState extends State<PublishForm> {
               },
               style: Theme.of(
                 context,
-              ).textTheme.bodyLarge?.copyWith(color: AppColors.background),
+              ).textTheme.bodyMedium?.copyWith(color: AppTheme.grafite),
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -120,7 +120,7 @@ class _PublishFormState extends State<PublishForm> {
                   borderSide: const BorderSide(color: Colors.transparent),
                 ),
                 filled: true,
-                fillColor: AppColors.offWhite,
+                fillColor: AppTheme.offWhite,
               ),
             ),
             SizedBox(height: 12),
@@ -132,12 +132,9 @@ class _PublishFormState extends State<PublishForm> {
                   label: Text(tag),
                   labelStyle: Theme.of(
                     context,
-                  ).textTheme.bodyLarge?.copyWith(color: AppColors.background),
-                  backgroundColor: AppColors.offWhite,
-                  deleteIcon: const Icon(
-                    Icons.close,
-                    color: AppColors.background,
-                  ),
+                  ).textTheme.bodyMedium?.copyWith(color: AppTheme.grafite),
+                  backgroundColor: AppTheme.offWhite,
+                  deleteIcon: const Icon(Icons.close, color: AppTheme.grafite),
                   onDeleted: () => widget.onRemoveTag?.call(tag),
                 );
               }).toList(),
@@ -147,7 +144,7 @@ class _PublishFormState extends State<PublishForm> {
               children: [
                 Expanded(
                   child: OutlinedButtonWidget(
-                    color: AppColors.primary,
+                    color: AppTheme.verdeDestaque,
                     size: Size(152, 51),
                     onPressed: () {
                       context.pop();
@@ -157,7 +154,7 @@ class _PublishFormState extends State<PublishForm> {
                     iconButton: Icon(
                       Icons.delete,
                       size: 24,
-                      color: AppColors.primary,
+                      color: AppTheme.verdeDestaque,
                     ),
                   ),
                 ),
@@ -180,15 +177,11 @@ class _PublishFormState extends State<PublishForm> {
                       children: [
                         Text(
                           'Publicar',
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(color: AppColors.background),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(color: AppTheme.grafite),
                         ),
                         SizedBox(height: 12),
-                        Icon(
-                          Icons.publish,
-                          size: 24,
-                          color: AppColors.background,
-                        ),
+                        Icon(Icons.publish, size: 24, color: AppTheme.grafite),
                       ],
                     ),
                   ),

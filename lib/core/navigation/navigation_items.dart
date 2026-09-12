@@ -1,5 +1,5 @@
 import 'package:code_connect_app/core/routes/routes.dart';
-import 'package:code_connect_app/shared/navigation/bottom_navigation_item.dart';
+import 'package:code_connect_app/core/navigation/bottom_navigation_item.dart';
 import 'package:flutter/material.dart';
 
 const navigationItems = [
@@ -16,7 +16,7 @@ const navigationItems = [
     selectedIcon: Icons.person,
   ),
   BottomNavigationItem(
-    label: 'Sobre',
+    label: 'Sobre Nós',
     route: Routes.about,
     icon: Icons.info_outlined,
     selectedIcon: Icons.info,

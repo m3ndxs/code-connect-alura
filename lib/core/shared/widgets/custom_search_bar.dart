@@ -1,4 +1,4 @@
-import 'package:code_connect_app/core/theme/app_colors.dart';
+import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -16,7 +16,7 @@ class CustomSearchBar extends StatelessWidget {
             onSubmitted: onSubmitted,
             hintText: 'Digite o que você procura',
             hintStyle: WidgetStateProperty.all(
-              Theme.of(context).textTheme.bodyMedium,
+              Theme.of(context).textTheme.bodySmall,
             ),
             padding: WidgetStateProperty.all(
               const EdgeInsets.symmetric(horizontal: 8),
@@ -28,7 +28,7 @@ class CustomSearchBar extends StatelessWidget {
             ),
             leading: Padding(
               padding: const EdgeInsetsGeometry.fromLTRB(16, 0, 16, 0),
-              child: const Icon(Icons.search, color: AppColors.offWhite),
+              child: const Icon(Icons.search, color: AppTheme.offWhite),
             ),
           ),
         ),
