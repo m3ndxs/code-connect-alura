@@ -14,7 +14,7 @@ class DioClient {
         onRequest: ((options, handler) async {
           // O token que esta sendo commitado é um token em HML para testes.
           options.headers['Authorization'] =
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXMzcmxscWQwMDAxbzBrd3VseWkxMXR3IiwiZW1haWwiOiJicnVub0Bjb2RlY29ubmVjdC5jb20iLCJpYXQiOjE3ODkyMjA4NTgsImV4cCI6MTc4OTMwNzI1OH0.IzCFnMtOM2Y3-m5WQo1G35v5M2s0R3jA6ZCP3mxrnwE';
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXMzcmxscWowMDAzbzBrd3A4dzdzbjNsIiwiZW1haWwiOiJkaWVnb0Bjb2RlY29ubmVjdC5jb20iLCJpYXQiOjE3ODk1OTcxNzcsImV4cCI6MTc4OTY4MzU3N30.ECI05WLXNSLJ8HLje-vQLndcaTyF3WncVrJoA7zxaIc';
           return handler.next(options);
         }),
       ),

@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       toolbarHeight: 110,
       centerTitle: true,
-      title: Image.asset('assets/images/Logo.png', height: 50),
+      title: Image.asset('lib/core/assets/images/Logo.png', height: 50),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: Padding(

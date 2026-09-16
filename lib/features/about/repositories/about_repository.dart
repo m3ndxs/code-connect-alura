@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class AboutRepository {
   Future getAboutData() async {
     final String jsonString = await rootBundle.loadString(
-      'assets/data/texts.json',
+      'lib/core/assets/texts.json',
     );
 
     final Map jsonMap = jsonDecode(jsonString);

@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:code_connect_app/core/errors/failures.dart';
-import 'package:code_connect_app/features/profile/domain/entities/user_entity.dart';
-import 'package:code_connect_app/features/profile/domain/usecases/profile_use_case.dart';
+import 'package:code_connect_app/features/profile/domain/profile/entities/user_entity.dart';
+import 'package:code_connect_app/features/profile/domain/profile/usecases/profile_use_case.dart';
 import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

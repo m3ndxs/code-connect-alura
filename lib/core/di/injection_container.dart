@@ -1,8 +1,8 @@
 import 'package:code_connect_app/core/network/dio_client.dart';
-import 'package:code_connect_app/features/profile/data/datasource/profile_remote_datasource.dart';
-import 'package:code_connect_app/features/profile/data/repositories/profile_repository_impl.dart';
-import 'package:code_connect_app/features/profile/domain/repositories/profile_repository.dart';
-import 'package:code_connect_app/features/profile/domain/usecases/profile_use_case.dart';
+import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
+import 'package:code_connect_app/features/profile/data/profile/repositories/profile_repository_impl.dart';
+import 'package:code_connect_app/features/profile/domain/profile/repositories/profile_repository.dart';
+import 'package:code_connect_app/features/profile/domain/profile/usecases/profile_use_case.dart';
 import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:code_connect_app/features/publish/data/datasource/publish_remote_datasource.dart';
 import 'package:code_connect_app/features/publish/data/repositories/publish_repository_impl.dart';

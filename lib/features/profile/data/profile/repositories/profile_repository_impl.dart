@@ -1,8 +1,8 @@
 import 'package:code_connect_app/core/errors/exceptions.dart';
 import 'package:code_connect_app/core/errors/failures.dart';
-import 'package:code_connect_app/features/profile/data/datasource/profile_remote_datasource.dart';
-import 'package:code_connect_app/features/profile/domain/entities/user_entity.dart';
-import 'package:code_connect_app/features/profile/domain/repositories/profile_repository.dart';
+import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
+import 'package:code_connect_app/features/profile/domain/profile/entities/user_entity.dart';
+import 'package:code_connect_app/features/profile/domain/profile/repositories/profile_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {

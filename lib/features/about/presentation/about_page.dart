@@ -31,7 +31,9 @@ class AboutPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset('assets/images/aluracontent_concept.png'),
+                      Image.asset(
+                        'lib/core/assets/images/aluracontent_concept.png',
+                      ),
                       SizedBox(height: 56),
                       Text(
                         data['title'],
@@ -69,7 +71,7 @@ class AboutPage extends StatelessWidget {
                       ),
                       SizedBox(height: 24),
                       Image.asset(
-                        'assets/images/aluracontent_concept_art_notebook.png',
+                        'lib/core/assets/images/aluracontent_concept_art_notebook.png',
                       ),
                       SizedBox(height: 56),
                       Align(
@@ -86,7 +88,7 @@ class AboutPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       SizedBox(height: 56),
-                      Image.asset('assets/images/icon.png'),
+                      Image.asset('lib/core/assets/images/icon.png'),
                       SizedBox(height: 16),
                       Text(
                         data['footer'],

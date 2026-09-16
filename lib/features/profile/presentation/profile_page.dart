@@ -1,3 +1,4 @@
+import 'package:code_connect_app/core/shared/widgets/custom_text_button.dart';
 import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:code_connect_app/core/shared/widgets/outlined_button_widget.dart';
@@ -110,6 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height: 16),
                     Divider(),
                     const SizedBox(height: 32),
+                    CustomTextButton(buttonTitle: 'Meus Projetos'),
                   ],
                 ),
               ),

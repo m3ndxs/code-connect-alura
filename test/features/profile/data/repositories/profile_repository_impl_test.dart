@@ -1,9 +1,9 @@
 import 'package:code_connect_app/core/errors/exceptions.dart';
 import 'package:code_connect_app/core/errors/failures.dart';
-import 'package:code_connect_app/features/profile/data/datasource/profile_remote_datasource.dart';
-import 'package:code_connect_app/features/profile/data/models/user_model.dart';
-import 'package:code_connect_app/features/profile/data/repositories/profile_repository_impl.dart';
-import 'package:code_connect_app/features/profile/domain/entities/user_entity.dart';
+import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
+import 'package:code_connect_app/features/profile/data/profile/models/user_model.dart';
+import 'package:code_connect_app/features/profile/data/profile/repositories/profile_repository_impl.dart';
+import 'package:code_connect_app/features/profile/domain/profile/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

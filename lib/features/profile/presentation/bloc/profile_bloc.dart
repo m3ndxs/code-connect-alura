@@ -1,5 +1,5 @@
-import 'package:code_connect_app/features/profile/domain/entities/user_entity.dart';
-import 'package:code_connect_app/features/profile/domain/usecases/profile_use_case.dart';
+import 'package:code_connect_app/features/profile/domain/profile/entities/user_entity.dart';
+import 'package:code_connect_app/features/profile/domain/profile/usecases/profile_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
