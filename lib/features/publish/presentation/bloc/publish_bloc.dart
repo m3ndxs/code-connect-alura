@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:code_connect_app/features/publish/domain/entities/post.dart';
+import 'package:code_connect_app/features/publish/domain/usecase/get_posts_by_profile_use_case.dart';
 import 'package:code_connect_app/features/publish/domain/usecase/post_publish_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,10 +11,12 @@ part 'publish_state.dart';
 
 class PublishBloc extends Bloc<PublishEvent, PublishState> {
   final PostPublishUseCase postPublishUseCase;
+  final GetPostsByProfileUseCase getPostsByProfileUseCase;
   final ImagePicker _imagePicker;
 
   PublishBloc({
     required this.postPublishUseCase,
+    required this.getPostsByProfileUseCase,
     ImagePicker? imagePicker,
   })  : _imagePicker = imagePicker ?? ImagePicker(),
         super(const PublishState()) {
@@ -24,6 +27,7 @@ class PublishBloc extends Bloc<PublishEvent, PublishState> {
     on<PickImageEvent>(_onPickImage);
     on<RemoveImageEvent>(_onRemoveImage);
     on<PublishSubmittedEvent>(_onPublishSubmitted);
+    on<GetPostsByProfileEvent>(_onGetPostsByProfile);
   }
 
   void _onAddTag(AddTagEvent event, Emitter<PublishState> emit) {
@@ -87,6 +91,27 @@ class PublishBloc extends Bloc<PublishEvent, PublishState> {
         ),
       ),
       (post) => emit(state.copyWith(status: PublishStatus.success, post: post)),
+    );
+  }
+
+  Future<void> _onGetPostsByProfile(
+    GetPostsByProfileEvent event,
+    Emitter<PublishState> emit,
+  ) async {
+    emit(state.copyWith(postsStatus: PostsStatus.loading));
+
+    final result = await getPostsByProfileUseCase(event.profileId);
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          postsStatus: PostsStatus.failure,
+          postsErrorMessage: failure.message,
+        ),
+      ),
+      (posts) => emit(
+        state.copyWith(posts: posts, postsStatus: PostsStatus.success),
+      ),
     );
   }
 }

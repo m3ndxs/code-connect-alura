@@ -29,4 +29,17 @@ class PublishRepositoryImpl implements PublishRepository {
       return Left(ServerFailure(exception.message));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Post>>> getPostsByProfile(
+    String profileId,
+  ) async {
+    try {
+      final postModels = await remoteDataSource.getPostsByProfile(profileId);
+
+      return Right(postModels);
+    } on ServerException catch (exception) {
+      return Left(ServerFailure(exception.message));
+    }
+  }
 }

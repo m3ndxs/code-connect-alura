@@ -1,4 +1,5 @@
 import 'package:code_connect_app/core/errors/exceptions.dart';
+import 'package:code_connect_app/core/network/api_url.dart';
 import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
 import 'package:code_connect_app/features/profile/data/profile/models/user_model.dart';
 import 'package:dio/dio.dart';
@@ -29,7 +30,7 @@ void main() {
     email: 'joao@teste.com',
     name: 'João',
     username: 'joao_dev_test',
-    avatar: 'avatar_test.png',
+    avatar: ApiUrl.resolve('avatar_test.png'),
   );
 
   group('GetProfile', () {

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'author.dart';
 
 class Post extends Equatable {
   final int id;
@@ -6,6 +7,9 @@ class Post extends Equatable {
   final String body;
   final String markdown;
   final String imageUrl;
+  final int likes;
+  final Author author;
+  final DateTime? createdAt;
 
   const Post({
     required this.id,
@@ -13,8 +17,20 @@ class Post extends Equatable {
     required this.body,
     required this.markdown,
     required this.imageUrl,
+    required this.likes,
+    required this.author,
+    this.createdAt,
   });
 
   @override
-  List<Object> get props => [id, title, body, markdown, imageUrl];
+  List<Object?> get props => [
+    id,
+    title,
+    body,
+    markdown,
+    imageUrl,
+    likes,
+    author,
+    createdAt,
+  ];
 }

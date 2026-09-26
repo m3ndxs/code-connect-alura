@@ -26,7 +26,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
           _isActive = !_isActive;
         });
 
-        widget.onPressed;
+        widget.onPressed?.call();
       },
       child: Text(
         widget.buttonTitle,

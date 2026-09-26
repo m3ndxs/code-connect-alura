@@ -1,3 +1,4 @@
+import 'package:code_connect_app/core/network/api_url.dart';
 import 'package:code_connect_app/features/profile/domain/profile/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
@@ -15,7 +16,7 @@ class UserModel extends UserEntity {
       email: json['email'],
       name: json['name'],
       username: json['username'],
-      avatar: json['avatar'],
+      avatar: ApiUrl.resolve(json['avatar'] ?? ''),
     );
   }
 }

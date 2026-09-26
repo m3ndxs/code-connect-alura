@@ -2,6 +2,8 @@ part of 'publish_bloc.dart';
 
 enum PublishStatus { initial, loading, success, failure }
 
+enum PostsStatus { initial, loading, success, failure }
+
 class PublishState extends Equatable {
   final List<String> tags;
   final String? selectedTag;
@@ -9,6 +11,9 @@ class PublishState extends Equatable {
   final PublishStatus status;
   final Post? post;
   final String? errorMessage;
+  final List<Post> posts;
+  final PostsStatus postsStatus;
+  final String? postsErrorMessage;
 
   const PublishState({
     this.tags = const [],
@@ -17,6 +22,9 @@ class PublishState extends Equatable {
     this.status = PublishStatus.initial,
     this.post,
     this.errorMessage,
+    this.posts = const [],
+    this.postsStatus = PostsStatus.initial,
+    this.postsErrorMessage,
   });
 
   PublishState copyWith({
@@ -28,6 +36,9 @@ class PublishState extends Equatable {
     PublishStatus? status,
     Post? post,
     String? errorMessage,
+    List<Post>? posts,
+    PostsStatus? postsStatus,
+    String? postsErrorMessage,
   }) {
     return PublishState(
       tags: tags ?? this.tags,
@@ -38,6 +49,9 @@ class PublishState extends Equatable {
       status: status ?? this.status,
       post: post ?? this.post,
       errorMessage: errorMessage,
+      posts: posts ?? this.posts,
+      postsStatus: postsStatus ?? this.postsStatus,
+      postsErrorMessage: postsErrorMessage,
     );
   }
 
@@ -49,5 +63,8 @@ class PublishState extends Equatable {
     status,
     post,
     errorMessage,
+    posts,
+    postsStatus,
+    postsErrorMessage,
   ];
 }

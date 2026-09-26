@@ -10,4 +10,6 @@ abstract class PublishRepository {
     String markdown,
     File image,
   );
+
+  Future<Either<Failure, List<Post>>> getPostsByProfile(String profileId);
 }

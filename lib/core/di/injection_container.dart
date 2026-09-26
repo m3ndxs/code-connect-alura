@@ -7,6 +7,7 @@ import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc
 import 'package:code_connect_app/features/publish/data/datasource/publish_remote_datasource.dart';
 import 'package:code_connect_app/features/publish/data/repositories/publish_repository_impl.dart';
 import 'package:code_connect_app/features/publish/domain/repositories/publish_repository.dart';
+import 'package:code_connect_app/features/publish/domain/usecase/get_posts_by_profile_use_case.dart';
 import 'package:code_connect_app/features/publish/domain/usecase/post_publish_use_case.dart';
 import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -28,8 +29,14 @@ void init() {
   );
 
   //Publish Post
-  sl.registerFactory(() => PublishBloc(postPublishUseCase: sl()));
+  sl.registerFactory(
+    () => PublishBloc(
+      postPublishUseCase: sl(),
+      getPostsByProfileUseCase: sl(),
+    ),
+  );
   sl.registerLazySingleton(() => PostPublishUseCase(sl()));
+  sl.registerLazySingleton(() => GetPostsByProfileUseCase(sl()));
   sl.registerLazySingleton<PublishRepository>(
     () => PublishRepositoryImpl(remoteDataSource: sl()),
   );

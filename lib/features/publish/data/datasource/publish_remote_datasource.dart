@@ -11,6 +11,8 @@ abstract class PublishRemoteDataSource {
     String markdwon,
     File image,
   );
+
+  Future<List<PostModel>> getPostsByProfile(String profileId);
 }
 
 class PublishRemoteDataSourceImpl implements PublishRemoteDataSource {
@@ -38,13 +40,28 @@ class PublishRemoteDataSourceImpl implements PublishRemoteDataSource {
         ),
       });
 
-      final response = await dio.post(
-        '/blog-posts',
-        data: formData,
-      );
+      final response = await dio.post('/blog-posts', data: formData);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return PostModel.fromJson(response.data);
+      } else {
+        throw ServerException(_extractMessage(response.data));
+      }
+    } on DioException catch (error) {
+      throw ServerException(_extractMessage(error.response?.data));
+    }
+  }
+
+  @override
+  Future<List<PostModel>> getPostsByProfile(String profileId) async {
+    try {
+      final response = await dio.get(
+        '/blog-posts',
+        queryParameters: {'authorId': profileId},
+      );
+
+      if (response.statusCode == 200) {
+        return PostModel.fromJsonList(response.data as List<dynamic>);
       } else {
         throw ServerException(_extractMessage(response.data));
       }
@@ -73,7 +90,12 @@ class PublishRemoteDataSourceImpl implements PublishRemoteDataSource {
   String _extractMessage(dynamic data) {
     if (data is Map<String, dynamic>) {
       final message = data['message'] ?? data['error'];
+
       if (message is String && message.isNotEmpty) return message;
+
+      if (message is List && message.isNotEmpty) {
+        return message.map((e) => e.toString()).join('\n');
+      }
     }
     return 'Servidor Indisponível no momento.';
   }

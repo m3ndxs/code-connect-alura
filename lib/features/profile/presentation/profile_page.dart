@@ -1,6 +1,8 @@
+import 'package:code_connect_app/core/shared/widgets/custom_card_post.dart';
 import 'package:code_connect_app/core/shared/widgets/custom_text_button.dart';
 import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
 import 'package:code_connect_app/core/shared/widgets/outlined_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool _showProjects = false;
+
   @override
   void initState() {
     super.initState();
@@ -111,7 +115,20 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height: 16),
                     Divider(),
                     const SizedBox(height: 32),
-                    CustomTextButton(buttonTitle: 'Meus Projetos'),
+                    CustomTextButton(
+                      buttonTitle: 'Meus Projetos',
+                      onPressed: () {
+                        setState(() => _showProjects = !_showProjects);
+
+                        if (_showProjects) {
+                          context.read<PublishBloc>().add(
+                            GetPostsByProfileEvent(user.id),
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 32),
+                    if (_showProjects) _buildProjectsList(context),
                   ],
                 ),
               ),
@@ -120,6 +137,62 @@ class _ProfilePageState extends State<ProfilePage> {
           return SizedBox.shrink();
         },
       ),
+    );
+  }
+
+  Widget _buildProjectsList(BuildContext context) {
+    return BlocBuilder<PublishBloc, PublishState>(
+      buildWhen: (previous, current) =>
+          previous.posts != current.posts ||
+          previous.postsStatus != current.postsStatus,
+      builder: (context, state) {
+        if (state.postsStatus == PostsStatus.loading) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (state.postsStatus == PostsStatus.failure) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32),
+            child: Text(
+              state.postsErrorMessage ?? 'Não foi possível carregar.',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppTheme.cinzaMedio,
+              ),
+            ),
+          );
+        }
+
+        if (state.posts.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32),
+            child: Text(
+              'Nenhum projeto publicado ainda.',
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppTheme.cinzaMedio),
+            ),
+          );
+        }
+
+        return Column(
+          children: [
+            for (final post in state.posts) ...[
+              CustomCardPost(
+                image: post.imageUrl,
+                title: post.title,
+                body: post.body,
+                author: post.author.username,
+                authorAvatar: post.author.avatar,
+                likes: post.likes,
+              ),
+              const SizedBox(height: 16),
+            ],
+          ],
+        );
+      },
     );
   }
 }

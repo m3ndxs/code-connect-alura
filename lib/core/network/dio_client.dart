@@ -1,10 +1,11 @@
+import 'package:code_connect_app/core/network/api_url.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {
   static Dio get instance {
     final dio = Dio(
       BaseOptions(
-        baseUrl: 'http://10.0.2.2:3000',
+        baseUrl: ApiUrl.base,
         connectTimeout: const Duration(seconds: 10),
       ),
     );
@@ -14,7 +15,7 @@ class DioClient {
         onRequest: ((options, handler) async {
           // O token que esta sendo commitado é um token em HML para testes.
           options.headers['Authorization'] =
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXMzcmxscWowMDAzbzBrd3A4dzdzbjNsIiwiZW1haWwiOiJkaWVnb0Bjb2RlY29ubmVjdC5jb20iLCJpYXQiOjE3ODk1OTcxNzcsImV4cCI6MTc4OTY4MzU3N30.ECI05WLXNSLJ8HLje-vQLndcaTyF3WncVrJoA7zxaIc';
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXMzcmxscWowMDAzbzBrd3A4dzdzbjNsIiwiZW1haWwiOiJkaWVnb0Bjb2RlY29ubmVjdC5jb20iLCJpYXQiOjE3OTA0MjcwNDgsImV4cCI6MTc5MDUxMzQ0OH0.xU8J-VfmbEuhhii8deh_v6VGDRvZOrBzjmmNpznvd68';
           return handler.next(options);
         }),
       ),

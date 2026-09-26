@@ -44,3 +44,12 @@ class PublishSubmittedEvent extends PublishEvent {
   @override
   List<Object> get props => [title, body, markdown];
 }
+
+class GetPostsByProfileEvent extends PublishEvent {
+  final String profileId;
+
+  const GetPostsByProfileEvent(this.profileId);
+
+  @override
+  List<Object> get props => [profileId];
+}
