@@ -1,0 +1,25 @@
+{
+    "about": {
+        "about_page": {
+            "welcomeTitle": "Bem-Vindo ao CodeConnect!",
+            "pageSubtitle": "Onde a comunidade e o código se unem!",
+            "pageDescription": "No coração da revolução digital está a colaboração. CodeConnect nasceu da visão de criar um espaço onde desenvolvedores, programadores e entusiastas da tecnologia podem se conectar, aprender e colaborar de maneira inigualável. Somos uma comunidade global apaixonada por código e estamos comprometidos em oferecer um ambiente inclusivo e inspirador para todos os níveis de habilidade.",
+            "missionTitle": "Nossa Missão",
+            "missionDescription": "Na CodeConnect, acreditamos que a colaboração é a essência da inovação. Nossa missão é fornecer uma plataforma onde os mentes criativas podem se unir, compartilhar conhecimento, e desenvolver projetos extraordinários. Quer você seja um novato ansioso para aprender ou um veterano experiente, você encontrará aqui um lar para suas aspirações tecnológicas.",
+            "joinUsTitle": "Junte-se a nós",
+            "joinUsDescription": "Estamos animados para ter você conosco nesta jornada empolgante. Junte-se à nossa comunidade vibrante e descubra o poder da colaboração no mundo do código.",
+            "clossingMessage": "Juntos, vamos transformar ideias em inovações e moldar o futuro digital."
+        }
+    },
+    "publish": {
+        "publish_page" : {
+            "newProject": "Novo Projeto",
+            "nameProject": "Nome do Projeto",
+            "description": "Descrição",
+            "tags": "Tags",
+            "buttonDiscard": "Descartar",
+            "buttonPublish": "Publicar",
+            "buttonUploadImage": "Carregar Imagem"
+        }
+    }
+}
