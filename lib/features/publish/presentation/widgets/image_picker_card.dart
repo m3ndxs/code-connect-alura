@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:code_connect_app/core/strings/app_strings/publish_strings.dart';
 import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
@@ -54,7 +55,7 @@ class ImagePickerCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Carregar Imagem',
+                  PublishStrings.buttonUploadImage,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(width: 8),
