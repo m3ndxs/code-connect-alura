@@ -1,8 +1,13 @@
 import 'package:code_connect_app/core/network/api_url.dart';
+import 'package:code_connect_app/core/storage/secure_storage_service.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {
-  static Dio get instance {
+  final SecureStorageService _secureStorage;
+
+  DioClient(this._secureStorage);
+
+  Dio get instance {
     final dio = Dio(
       BaseOptions(
         baseUrl: ApiUrl.base,
@@ -12,12 +17,13 @@ class DioClient {
 
     dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: ((options, handler) async {
-          // O token que esta sendo commitado é um token em HML para testes.
-          options.headers['Authorization'] =
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXMzcmxscWowMDAzbzBrd3A4dzdzbjNsIiwiZW1haWwiOiJkaWVnb0Bjb2RlY29ubmVjdC5jb20iLCJpYXQiOjE3OTA0MjcwNDgsImV4cCI6MTc5MDUxMzQ0OH0.xU8J-VfmbEuhhii8deh_v6VGDRvZOrBzjmmNpznvd68';
+        onRequest: (options, handler) async {
+          final token = await _secureStorage.getAccessToken();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
           return handler.next(options);
-        }),
+        },
       ),
     );
 
