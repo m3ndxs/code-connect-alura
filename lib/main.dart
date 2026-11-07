@@ -1,4 +1,5 @@
 import 'package:code_connect_app/app.dart';
+import 'package:code_connect_app/core/strings/texts.dart';
 import 'package:code_connect_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:code_connect_app/core/di/injection_container.dart' as di;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   di.init();
+  await Texts.load();
 
   runApp(
     MultiBlocProvider(
@@ -17,33 +19,5 @@ void main() async {
       ],
       child: const App(),
     ),
-
-    // MultiProvider(
-    //   providers: [
-    //     Provider(create: (context) => DioClient()),
-    //     Provider(
-    //       create: (context) =>
-    //           PublishRemoteDatasource(context.read<DioClient>().dio),
-    //     ),
-    //     Provider<PublishRepository>(
-    //       create: (context) =>
-    //           PublishRepositoryImpl(context.read<PublishRemoteDatasource>()),
-    //     ),
-    //     ChangeNotifierProvider(
-    //       create: (context) =>
-    //           PublishProvider(context.read<PublishRepository>()),
-    //     ),
-    //     ChangeNotifierProvider(create: (_) => TextProvider()..load()),
-    //     Provider(
-    //       create: (context) =>
-    //           ProfileRemoteDatasource(context.read<DioClient>().dio),
-    //     ),
-    //     Provider<ProfileRepository>(
-    //       create: (context) =>
-    //           ProfileRepositoryImpl(context.read<ProfileRemoteDatasource>()),
-    //     ),
-    //   ],
-    //   child: const App(),
-    // ),
   );
 }

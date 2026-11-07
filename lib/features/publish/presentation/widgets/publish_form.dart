@@ -1,3 +1,4 @@
+import 'package:code_connect_app/core/strings/app_strings/publish_strings.dart';
 import 'package:code_connect_app/core/theme/app_theme.dart';
 import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
 import 'package:code_connect_app/core/shared/widgets/outlined_button_widget.dart';
@@ -46,12 +47,12 @@ class _PublishFormState extends State<PublishForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Novo Projeto',
+              PublishStrings.newProject,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(height: 40),
             Text(
-              'Nome do Projeto',
+              PublishStrings.nameProject,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(height: 8),
