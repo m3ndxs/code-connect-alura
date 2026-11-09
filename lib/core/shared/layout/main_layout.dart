@@ -4,18 +4,20 @@ import 'package:flutter/material.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
+  final bool showAppBar;
   final bool showBottomNavigation;
 
   const MainLayout({
     super.key,
     required this.child,
+    this.showAppBar = true,
     this.showBottomNavigation = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: showAppBar ? CustomAppBar() : null,
       body: child,
       bottomNavigationBar: showBottomNavigation
           ? const CustomBottomNavigation()

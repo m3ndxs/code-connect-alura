@@ -1,5 +1,10 @@
 import 'package:code_connect_app/core/network/dio_client.dart';
 import 'package:code_connect_app/core/storage/secure_storage_service.dart';
+import 'package:code_connect_app/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:code_connect_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:code_connect_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:code_connect_app/features/auth/domain/usecase/login_use_case.dart';
+import 'package:code_connect_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
 import 'package:code_connect_app/features/profile/data/profile/repositories/profile_repository_impl.dart';
 import 'package:code_connect_app/features/profile/domain/profile/repositories/profile_repository.dart';
@@ -26,7 +31,19 @@ void init() {
   );
 
   // Dio
-  sl.registerLazySingleton(() => DioClient(sl<SecureStorageService>()).instance);
+  sl.registerLazySingleton(
+    () => DioClient(sl<SecureStorageService>()).instance,
+  );
+
+  // Auth
+  sl.registerFactory(() => LoginCubit(usecase: sl()));
+  sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(datasource: sl(), secureStorage: sl()),
+  );
+  sl.registerLazySingleton<AuthRemoteDatasource>(
+    () => AuthRemoteDatasourceImpl(sl()),
+  );
 
   // Profile
   sl.registerFactory(() => ProfileBloc(profileUseCase: sl()));
