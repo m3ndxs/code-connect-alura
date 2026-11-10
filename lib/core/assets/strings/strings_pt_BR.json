@@ -21,5 +21,16 @@
             "buttonPublish": "Publicar",
             "buttonUploadImage": "Carregar Imagem"
         }
+    },
+    "login": {
+        "login_page": {
+            "loginTitle": "Login",
+            "welcomeTitle": "Boas-vindas! Faça seu login.",
+            "emailOrUser": "Email ou usuário",
+            "forgotPassword": "Esqueci a senha",
+            "buttonLogin": "Login",
+            "dontAccount": "Ainda não tem conta?",
+            "createRegister": "Crie seu cadastro!"
+        }
     }
 }

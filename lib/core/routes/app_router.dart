@@ -1,5 +1,6 @@
 import 'package:code_connect_app/core/routes/routes.dart';
 import 'package:code_connect_app/features/about/presentation/about_page.dart';
+import 'package:code_connect_app/features/auth/presentation/auth_page.dart';
 import 'package:code_connect_app/features/feed/presentation/feed_page.dart';
 import 'package:code_connect_app/features/profile/presentation/profile_page.dart';
 import 'package:code_connect_app/features/publish/presentation/pages/publish_page.dart';
@@ -7,7 +8,7 @@ import 'package:code_connect_app/core/shared/layout/main_layout.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: Routes.feed,
+  initialLocation: Routes.auth,
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -38,6 +39,12 @@ final appRouter = GoRouter(
       path: Routes.publish,
       builder: (_, _) {
         return const PublishPage();
+      },
+    ),
+    GoRoute(
+      path: Routes.auth,
+      builder: (_, _) {
+        return const AuthPage();
       },
     ),
   ],

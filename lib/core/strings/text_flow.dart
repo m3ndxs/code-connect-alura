@@ -1,1 +1,1 @@
-enum TextFlow { about, publish }
+enum TextFlow { about, publish, login }

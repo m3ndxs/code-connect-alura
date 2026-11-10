@@ -1,4 +1,10 @@
 import 'package:code_connect_app/core/network/dio_client.dart';
+import 'package:code_connect_app/core/storage/secure_storage_service.dart';
+import 'package:code_connect_app/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:code_connect_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:code_connect_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:code_connect_app/features/auth/domain/usecase/login_use_case.dart';
+import 'package:code_connect_app/features/auth/presentation/cubit/login_cubit.dart';
 import 'package:code_connect_app/features/profile/data/profile/datasource/profile_remote_datasource.dart';
 import 'package:code_connect_app/features/profile/data/profile/repositories/profile_repository_impl.dart';
 import 'package:code_connect_app/features/profile/domain/profile/repositories/profile_repository.dart';
@@ -10,13 +16,34 @@ import 'package:code_connect_app/features/publish/domain/repositories/publish_re
 import 'package:code_connect_app/features/publish/domain/usecase/get_posts_by_profile_use_case.dart';
 import 'package:code_connect_app/features/publish/domain/usecase/post_publish_use_case.dart';
 import 'package:code_connect_app/features/publish/presentation/bloc/publish_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 void init() {
+  //Secure Storage
+  sl.registerLazySingleton<FlutterSecureStorage>(
+    () => const FlutterSecureStorage(),
+  );
+  sl.registerLazySingleton<SecureStorageService>(
+    () => SecureStorageService(sl<FlutterSecureStorage>()),
+  );
+
   // Dio
-  sl.registerLazySingleton(() => DioClient.instance);
+  sl.registerLazySingleton(
+    () => DioClient(sl<SecureStorageService>()).instance,
+  );
+
+  // Auth
+  sl.registerFactory(() => LoginCubit(usecase: sl()));
+  sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(datasource: sl(), secureStorage: sl()),
+  );
+  sl.registerLazySingleton<AuthRemoteDatasource>(
+    () => AuthRemoteDatasourceImpl(sl()),
+  );
 
   // Profile
   sl.registerFactory(() => ProfileBloc(profileUseCase: sl()));
@@ -30,10 +57,7 @@ void init() {
 
   //Publish Post
   sl.registerFactory(
-    () => PublishBloc(
-      postPublishUseCase: sl(),
-      getPostsByProfileUseCase: sl(),
-    ),
+    () => PublishBloc(postPublishUseCase: sl(), getPostsByProfileUseCase: sl()),
   );
   sl.registerLazySingleton(() => PostPublishUseCase(sl()));
   sl.registerLazySingleton(() => GetPostsByProfileUseCase(sl()));
